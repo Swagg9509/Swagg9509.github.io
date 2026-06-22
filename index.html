@@ -6,127 +6,221 @@
 <title>SWAGG9509</title>
 
 <style>
-body{
+
+*{
     margin:0;
-    background:#000;
-    color:#00ff41;
-    font-family:Consolas, monospace;
+    padding:0;
+    box-sizing:border-box;
 }
 
-canvas{
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family:'Consolas', monospace;
+    color:white;
+    background:#050010;
+}
+
+/* Animated cosmic background */
+
+body::before{
+    content:"";
     position:fixed;
-    top:0;
-    left:0;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%, rgba(168,85,247,.35), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(139,92,246,.25), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(192,132,252,.15), transparent 40%);
+    z-index:-3;
+}
+
+/* Stars */
+
+.stars{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background-image:
+        radial-gradient(white 1px, transparent 1px);
+    background-size:45px 45px;
+    opacity:.2;
+}
+
+/* Big nebula */
+
+.nebula{
+    position:fixed;
+    width:1000px;
+    height:1000px;
+    left:-300px;
+    top:-300px;
+    border-radius:50%;
+    background:rgba(168,85,247,.15);
+    filter:blur(150px);
     z-index:-1;
 }
 
-.container{
-    max-width:900px;
+/* ASCII LOGO */
+
+.logo{
+    display:flex;
+    justify-content:center;
+    overflow-x:auto;
+
+    white-space:pre;
+
+    padding:40px 20px 20px 20px;
+
+    color:#d8b4fe;
+
+    font-size:clamp(5px,0.9vw,13px);
+
+    text-shadow:
+        0 0 10px #a855f7,
+        0 0 20px #a855f7,
+        0 0 40px #9333ea,
+        0 0 80px #9333ea;
+}
+
+/* Main title */
+
+.hero{
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:clamp(3rem,8vw,7rem);
+    letter-spacing:8px;
+
+    text-shadow:
+        0 0 10px #c084fc,
+        0 0 20px #c084fc,
+        0 0 40px #9333ea;
+}
+
+.hero p{
+    color:#d1d5db;
+    margin-top:10px;
+}
+
+/* Glass Cards */
+
+.cards{
+    width:min(1200px,90%);
     margin:50px auto;
-    padding:20px;
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    justify-content:center;
 }
 
-.box{
-    background:rgba(0,0,0,0.8);
-    border:1px solid #00ff41;
-    padding:20px;
-    margin-bottom:20px;
-    box-shadow:0 0 20px #00ff41;
+.card{
+    width:320px;
+
+    padding:25px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    transition:.35s ease;
+
+    cursor:pointer;
 }
 
-h1{
-    margin:0;
+.card:hover{
+
+    transform:
+        translateY(-10px)
+        scale(1.03);
+
+    border-color:#c084fc;
+
+    box-shadow:
+        0 0 20px #9333ea,
+        0 0 40px #9333ea,
+        0 0 80px rgba(147,51,234,.8);
 }
 
-.prompt{
-    color:#00ff41;
+.card h2{
+    margin-bottom:15px;
+    color:#f3e8ff;
 }
 
-.blink{
-    animation:blink 1s infinite;
+.card p{
+    color:#d1d5db;
+    line-height:1.6;
 }
 
-@keyframes blink{
-    50%{
-        opacity:0;
-    }
+/* Footer */
+
+footer{
+    text-align:center;
+    padding:50px 20px;
+    color:#9ca3af;
 }
+
 </style>
 </head>
 <body>
 
-<canvas id="matrix"></canvas>
+<div class="stars"></div>
+<div class="nebula"></div>
 
-<div class="container">
+<pre class="logo">
+ _________                              ________._______________  ________
+/   _____/_  _  _______     ____   ____/   __   \   ____/\   _  \/   __   \
+\_____  \\ \/ \/ /\__  \   / ___\ / ___\____    /____  \ /  /_\  \____    /
+/        \\     /  / __ \_/ /_/  > /_/  > /    //       \\  \_/   \ /    /
+/_______  / \/\_/  (____  /\___  /\___  / /____//______  / \_____  //____/
+        \/              \//_____//_____/               \/        \/
+</pre>
 
-<div class="box">
-<h1>SWAGG9509</h1>
-<p>> ACCESS GRANTED</p>
-<p>> Welcome Guys</p>
+<section class="hero">
+    <h1>SWAGG9509</h1>
+    <p>Cosmic Developer • Creator • Explorer</p>
+</section>
+
+<div class="cards">
+
+    <div class="card">
+        <h2>🚀 About</h2>
+        <p>
+            Welcome to my universe.
+            Building websites, learning code,
+            and creating cool projects.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>💻 Projects</h2>
+        <p>
+            GitHub repositories, experiments,
+            tools and future creations.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>🌌 Cosmic Zone</h2>
+        <p>
+            Inspired by space,
+            cyberpunk aesthetics,
+            and futuristic technology.
+        </p>
+    </div>
+
 </div>
 
-<div class="box">
-<p class="prompt">user@swagg9509:~$ whoami</p>
-<p>Developer | Creator | Future IT-specialist</p>
-</div>
-
-<div class="box">
-<p class="prompt">user@swagg9509:~$ projects</p>
-<p>- Website Development</p>
-<p>- GitHub Projects</p>
-<p>- Future AI Experiments</p>
-</div>
-
-<div class="box">
-<p class="prompt">user@swagg9509:~$ status</p>
-<p>ONLINE <span class="blink">█</span></p>
-</div>
-
-</div>
-
-<script>
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
-
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
-
-const chars =
-"01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-const arr = chars.split("");
-
-const fontSize = 16;
-const columns = canvas.width/fontSize;
-
-const drops=[];
-
-for(let x=0;x<columns;x++){
-    drops[x]=1;
-}
-
-function draw(){
-    ctx.fillStyle="rgba(0,0,0,0.05)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    ctx.fillStyle="#00ff41";
-    ctx.font=fontSize+"px monospace";
-
-    for(let i=0;i<drops.length;i++){
-        const text=arr[Math.floor(Math.random()*arr.length)];
-
-        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-        if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
-            drops[i]=0;
-        }
-
-        drops[i]++;
-    }
-}
-
-setInterval(draw,35);
-</script>
+<footer>
+    © 2026 SWAGG9509
+</footer>
 
 </body>
 </html>

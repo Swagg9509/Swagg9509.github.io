@@ -1,146 +1,132 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SWAGG9509</title>
+<title>SWAGG9509 Terminal</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
 body{
-    background:#050505;
-    color:white;
-    overflow-x:hidden;
+    margin:0;
+    background:#000;
+    color:#00ff41;
+    font-family:Consolas, monospace;
 }
 
-.hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-}
-
-h1{
-    font-size:5rem;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    animation:glow 2s infinite alternate;
-}
-
-.subtitle{
-    margin-top:15px;
-    color:#aaa;
-    font-size:1.2rem;
-}
-
-.btn{
-    margin-top:30px;
-    padding:15px 35px;
-    border:2px solid #00ffff;
-    color:#00ffff;
-    text-decoration:none;
-    border-radius:50px;
-    transition:0.3s;
-}
-
-.btn:hover{
-    background:#00ffff;
-    color:black;
-    box-shadow:0 0 30px #00ffff;
-}
-
-.section{
-    padding:100px 10%;
-}
-
-.card{
-    background:#111;
-    padding:30px;
-    border-radius:20px;
-    margin-top:20px;
-    border:1px solid #222;
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 25px rgba(0,255,255,0.3);
-}
-
-footer{
-    text-align:center;
-    padding:40px;
-    color:#777;
-}
-
-@keyframes glow{
-    from{
-        text-shadow:
-        0 0 10px #00ffff,
-        0 0 20px #00ffff;
-    }
-    to{
-        text-shadow:
-        0 0 30px #00ffff,
-        0 0 60px #00ffff;
-    }
-}
-
-.stars{
+canvas{
     position:fixed;
-    width:100%;
-    height:100%;
     top:0;
     left:0;
     z-index:-1;
-    background:
-    radial-gradient(white 1px, transparent 1px);
-    background-size:40px 40px;
-    opacity:0.15;
+}
+
+.container{
+    max-width:900px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.box{
+    background:rgba(0,0,0,0.8);
+    border:1px solid #00ff41;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 0 20px #00ff41;
+}
+
+h1{
+    margin:0;
+}
+
+.prompt{
+    color:#00ff41;
+}
+
+.blink{
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
 }
 </style>
 </head>
-
 <body>
 
-<div class="stars"></div>
+<canvas id="matrix"></canvas>
 
-<section class="hero">
-    <h1>SWAGG9509</h1>
-    <p class="subtitle">Developer • Creator • Future Legend</p>
-    <a href="#about" class="btn">Explore</a>
-</section>
+<div class="container">
 
-<section id="about" class="section">
-    <h2>About Me</h2>
+<div class="box">
+<h1>SWAGG9509</h1>
+<p>> ACCESS GRANTED</p>
+<p>> Welcome to the Matrix.</p>
+</div>
 
-    <div class="card">
-        <h3>🚀 Projects</h3>
-        <p>Building cool stuff on the internet.</p>
-    </div>
+<div class="box">
+<p class="prompt">user@swagg9509:~$ whoami</p>
+<p>Developer | Creator | Future Hacker</p>
+</div>
 
-    <div class="card">
-        <h3>💻 Coding</h3>
-        <p>Learning web development and creating awesome websites.</p>
-    </div>
+<div class="box">
+<p class="prompt">user@swagg9509:~$ projects</p>
+<p>- Website Development</p>
+<p>- GitHub Projects</p>
+<p>- Future AI Experiments</p>
+</div>
 
-    <div class="card">
-        <h3>🔥 Goals</h3>
-        <p>Become a top creator and launch big projects.</p>
-    </div>
-</section>
+<div class="box">
+<p class="prompt">user@swagg9509:~$ status</p>
+<p>ONLINE <span class="blink">█</span></p>
+</div>
 
-<footer>
-    © 2026 SWAGG9509
-</footer>
+</div>
+
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const chars =
+"01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const arr = chars.split("");
+
+const fontSize = 16;
+const columns = canvas.width/fontSize;
+
+const drops=[];
+
+for(let x=0;x<columns;x++){
+    drops[x]=1;
+}
+
+function draw(){
+    ctx.fillStyle="rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="#00ff41";
+    ctx.font=fontSize+"px monospace";
+
+    for(let i=0;i<drops.length;i++){
+        const text=arr[Math.floor(Math.random()*arr.length)];
+
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+        if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
+            drops[i]=0;
+        }
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw,35);
+</script>
 
 </body>
 </html>
